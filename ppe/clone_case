@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+#
+# #########################
+# Purpose: Clone a case for PPE
+# Author: Adrianna C. Foster
+# Date: April, 2022
+# bash version 4.2.46
+# #########################
+# #########################
+
+
+SAMPLE=$1
+
+## create file and folder names
+NAME=FATES_SP_PPE_sample_${SAMPLE}
+PARAM_DIR=/glade/work/afoster/FATES_SP/PPE/param_files
+PARAM_FILE=fates_params_${SAMPLE}.nc
+
+## clone dir
+CLONE_ROOT=/glade/work/afoster/FATES_SP/PPE/cases/FATES_PPE_base_19c57a730_253b6003
+
+## these won't change
+CASE_DIR=/glade/work/afoster/FATES_SP/PPE/cases
+SRCDIR=/glade/work/afoster/ctsm_fates
+
+## output directory
+OUT_DIR=/glade/scratch/afoster/FATES_PPE
+
+## Cime scripts directory
+base_dir=${SRCDIR}/cime/scripts
+
+## full path of case
+case_name=${CASE_DIR}/${NAME}
+
+## clone from the base case
+cd ${base_dir}
+./create_clone --case ${case_name} --clone ${CLONE_ROOT} --keepexe --cime-output-root ${OUT_DIR}
+
+cd ${case_name}
+
+./case.setup
+
+## these options are reset in the clone
+./xmlchange --id STOP_N --val 20
+./xmlchange --id STOP_OPTION --val nyears
+./xmlchange --id REST_OPTION --val nyears
+./xmlchange --id RESUBMIT --val 2
+./xmlchange --id JOB_WALLCLOCK_TIME --val 02:00:00 --subgroup case.run
+./xmlchange --id JOB_QUEUE --val economy --subgroup case.run
+
+# now we need to update the user_nl_clm file
+#comment out previous paramfile from user_nl_clm
+:> user_nl_clm.tmp
+while read line; do
+    if [[ $line != *"fates_paramfile"* ]]; then
+        echo $line>>user_nl_clm.tmp
+    else
+	echo '!'$line>>user_nl_clm.tmp
+    fi
+done<user_nl_clm
+mv user_nl_clm.tmp user_nl_clm
+
+#append correct paramfile
+pfile=${PARAM_DIR}/${PARAM_FILE}
+pfilestr="fates_paramfile = '"$pfile"'"
+echo -e "\n"$pfilestr >> user_nl_clm
+
+
+## submit the case - no need to build
+./case.submit

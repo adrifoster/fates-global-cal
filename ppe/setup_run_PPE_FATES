@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+
+#
+# #########################
+# Purpose: Create and build a sparse grid run for FATES SP
+# Author: Adrianna C. Foster
+# Date: April, 2022
+# bash version 4.2.46
+# #########################
+# #########################
+# Notes: Co-opted from Keith Oleson's script for the CLM5 PPE (/glade/work/oleson/PPE/setup_run_PPE_BGC.csh)
+
+#==============================================================
+# Parameters: file names and directories, etc.
+#==============================================================
+
+TAG=FATES_PPE_base                              ## used to create case name
+CASEDIR=/glade/work/afoster/FATES_SP/PPE/cases  ## case directory location
+SRCDIR=/glade/work/afoster/ctsm_fates           ## CTSM code directory
+
+
+#==============================================================
+# Step 1. Set up case name
+#==============================================================
+
+## Get CTSM and FATES git versions - these will go into case name
+cd ${SRCDIR}
+githashctsm=`git log -n 1 --format=%h`
+
+cd src/fates
+githashfates=`git log -n 1 --format=%h`
+
+## Create case name with ctsm and fates githash
+case_name=${CASEDIR}/${TAG}_${githashctsm}_${githashfates}
+
+## Define CIME directory
+base_dir=${SRCDIR}/cime/scripts
+cd ${base_dir}
+
+
+#==============================================================
+# Step 2. Create the case and update parameters/files
+#==============================================================
+
+./create_newcase --case ${case_name} --compset I2000Clm51FatesSpRsGs --res f19_g17 --project P93300041 --run-unsupported --driver mct
+
+
+cd ${case_name}
+
+## Copy DATM streams files - using Control for now
+cp /glade/work/oleson/PPE/casefiles/Control/user_datm.streams.txt.CLMGSWP3v1.Precip .
+cp /glade/work/oleson/PPE/casefiles/Control/user_datm.streams.txt.CLMGSWP3v1.Solar .
+cp /glade/work/oleson/PPE/casefiles/Control/user_datm.streams.txt.CLMGSWP3v1.TPQW .
+
+## Copy over user_nl_datm file
+cp /glade/work/oleson/PPE/casefiles/Control/user_nl_datm .
+
+## Copy over user_nl_clm file
+cp /glade/work/afoster/FATES_SP/PPE/casefiles/user_nl_clm .
+
+## Update env_run.xml
+./xmlchange RUN_STARTDATE=0001-01-01
+./xmlchange STOP_OPTION=nyears
+./xmlchange STOP_N=20
+./xmlchange RESUBMIT=1
+./xmlchange ATM_DOMAIN_FILE=domain.lnd.fv1.9x2.5_gx1v7.181205v4.sparse400.nc
+./xmlchange ATM_DOMAIN_PATH=/glade/p/cgd/tss/people/oleson/modify_domain
+./xmlchange LND_DOMAIN_FILE=domain.lnd.fv1.9x2.5_gx1v7.181205v4.sparse400.nc
+./xmlchange LND_DOMAIN_PATH=/glade/p/cgd/tss/people/oleson/modify_domain
+./xmlchange DATM_CLMNCEP_YR_ALIGN=1
+./xmlchange DATM_CLMNCEP_YR_START=2005
+./xmlchange DATM_CLMNCEP_YR_END=2014
+
+## Update env_mach_pes.xml
+./xmlchange NTASKS_CPL=-2
+./xmlchange NTASKS_OCN=-2
+./xmlchange NTASKS_WAV=-2
+./xmlchange NTASKS_GLC=-2
+./xmlchange NTASKS_ICE=-2
+./xmlchange NTASKS_ROF=-2
+./xmlchange NTASKS_LND=-2
+
+## Update env_workflow.xml
+./xmlchange JOB_WALLCLOCK_TIME=02:00:00 --subgroup case.run
+./xmlchange JOB_QUEUE=economy --subgroup case.run
+
+#==============================================================
+# Step 3. Set up the case, preview namelists, and build the case
+#==============================================================
+
+./case.setup
+
+./preview_namelists
+
+./case.build
+
+
+#==============================================================
+# Step 4. Submit the case
+#==============================================================
+
+./case.submit
+

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#
+# #########################
+# Purpose: Submit a bunch of ensembles
+# Author: Adrianna C. Foster
+# Date: April, 2022
+# bash version 4.2.46
+# #########################
+# #########################
+
+## update this as needed
+NSAMP=250
+
+for ((i=1; i<=${NSAMP}; i++)); do
+    ./clone_case $i
+done
