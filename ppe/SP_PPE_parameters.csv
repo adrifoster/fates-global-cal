@@ -1,0 +1,129 @@
+clm_parameter,fates_parameter,min,max,units,dim,group,description
+none,fates_alloc_storage_cushion,50percent,1,fraction,pft,allocation,maximum size of storage C pool
+none,fates_allom_agb_frac,50percent,1,fraction,pft,allometry,Fraction of woody biomass that is above ground
+none,fates_allom_agb1,50percent,50percent,variable,pft,allometry,Parameter 1 for agb allometry
+none,fates_allom_agb2,50percent,50percent,variable,pft,allometry,Parameter 2 for agb allometry
+none,fates_allom_agb3,50percent,50percent,variable,pft,allometry,Parameter 3 for agb allometry
+none,fates_allom_agb4,50percent,50percent,variable,pft,allometry,Parameter 4 for agb allometry
+none,fates_allom_blca_expnt_diff,0,2,unitless,pft,allometry,difference between allometric DBH:bleaf and DBH:crown area exponents
+none,fates_allom_d2bl1,50percent,50percent,variable,pft,allometry,Parameter 1 for d2bl allometry
+none,fates_allom_d2bl2,50percent,50percent,variable,pft,allometry,Parameter 2 for d2bl allometry
+none,fates_allom_d2bl3,50percent,50percent,unitless,pft,allometry,Parameter 3 for d2bl allometry
+none,fates_allom_d2ca_coefficient_max,50percent,50percent,m2 cm^(-1/beta),pft,allometry,max (savanna) dbh to area multiplier factor where: area = n*d2ca_coeff*dbh^beta
+none,fates_allom_d2ca_coefficient_min,50percent,50percent,m2 cm^(-1/beta),pft,allometry,min (forest) dbh to area multiplier factor where: area = n*d2ca_coeff*dbh^beta
+none,fates_allom_d2h1,50percent,50percent,variable,pft,allometry,Parameter 1 for d2h allometry (intercept
+none,fates_allom_d2h2,50percent,50percent,variable,pft,allometry,Parameter 2 for d2h allometry (slope
+none,fates_allom_dbh_maxheight,50percent,50percent,cm,pft,allometry,the diameter (if any) corresponding to maximum height
+none,fates_allom_frbstor_repro,50percent,1,fraction,pft,allometry,fraction of bstore goes to reproduction after plant dies
+froot_leaf,fates_allom_l2fr,50percent,50percent,gC/gC,pft,allometry,Allocation parameter: fine root C per leaf C
+none,fates_allom_la_per_sa_int,50percent,50percent,m2/cm2,pft,allometry,Leaf area per sapwood area
+none,fates_allom_la_per_sa_slp,0,0.5,m2/cm2/m,pft,allometry,Leaf area per sapwood area rate of change with height
+none,fates_allom_sai_scaler,50percent,50percent,m2/m2,pft,allometry,allometric ratio of SAI per LAI
+none,fates_allom_zroot_k,50percent,50percent,unitless,pft,allometry,scale coefficient of logistic rooting depth model
+none,fates_allom_zroot_max_dbh,50percent,50percent,cm,pft,allometry,dbh at which a plant reaches the maximum value for its maximum rooting depth
+none,fates_allom_zroot_max_z,50percent,50percent,m,pft,allometry,the maximum rooting depth defined at dbh = fates_allom_zroot_max_dbh. note: max_z=min_z=large
+none,fates_allom_zroot_min_dbh,50percent,50percent,cm,pft,allometry,dbh at which the maximum rooting depth for a recruit is defined
+none,fates_allom_zroot_min_z,50percent,50percent,m,pft,allometry,the maximum rooting depth defined at dbh = fates_allom_zroot_min_dbh. note: max_z=min_z=large
+none,fates_fnrt_prof_a,50percent,50percent,unitless,pft,allometry,Fine root profile function
+none,fates_fnrt_prof_b,50percent,50percent,unitless,pft,allometry,Fine root profile function
+wood_density,fates_wood_density,0.25,0.75,g/cm3,pft,allometry,mean density of woody tissue in plant
+none,fates_fire_crown_depth_frac,0.01,1,fraction,pft,allometry,the depth of a cohorts crown as a fraction of its height
+none,fates_canopy_closure_thresh,50percent,50percent,unitless,global,canopy,tree canopy coverage at which crown area allometry changes from savanna to forest value
+none,fates_comp_excln,50percent,50percent,none,global,canopy,IF POSITIVE: weighting factor (exponent on dbh) for canopy layer exclusion and promotion
+none,fates_trim_inc,50percent,50percent,m2/m2,pft,canopy,Arbitrary incremental change in trimming function.
+none,fates_trim_limit,50percent,50percent,m2/m2,pft,canopy,Arbitrary limit to reductions in leaf area with stress
+none,fates_nitr_store_ratio,50percent,50percent,(gN/gN),pft,CNP,ratio of storeable N
+none,fates_phos_store_ratio,50percent,50percent,(gP/gP),pft,CNP,ratio of storeable P
+none,fates_prt_nitr_stoich_p1,50percent,50percent,(gN/gC),pft_dim,CNP,nitrogen stoichiometry- parameter 1
+none,fates_prt_nitr_stoich_p2,50percent,50percent,(gN/gC),pft_dim,CNP,nitrogen stoichiometry- parameter 2
+none,fates_prt_phos_stoich_p1,50percent,50percent,(gP/gC),pft_dim,CNP,phosphorous stoichiometry- parameter 1
+none,fates_prt_phos_stoich_p2,50percent,50percent,(gP/gC),pft_dim,CNP,phosphorous stoichiometry- parameter 2
+none,fates_turnover_carb_retrans,0,1,-,pft_dim,CNP,retranslocation fraction of carbon in turnover
+none,fates_turnover_nitr_retrans,0,1,-,pft_dim,CNP,retranslocation fraction of nitrogen in turnover
+none,fates_turnover_phos_retrans,0,1,-,pft_dim,CNP,retranslocation fraction of phosphorous in turnover- parameter 1
+none,fates_cohort_age_fusion_tol,100percent,100percent,unitless,global,patch/cohort,minimum fraction in differece in cohort age between cohorts.
+none,fates_cohort_size_fusion_tol,100percent,100percent,unitless,global,patch/cohort,minimum fraction in difference in dbh between cohorts
+none,fates_cwd_fcel,50percent,1,fraction,global,litter,Cellulose fraction for CWD
+none,fates_cwd_flig,50percent,1,fraction,global,litter,Lignin fraction of coarse woody debris
+none,fates_fr_fcel,50percent,1,fraction,pft,litter,Fine root litter cellulose fraction
+none,fates_fr_flab,50percent,1,fraction,pft,litter,Fine root litter labile fraction
+none,fates_fr_flig,50percent,1,fraction,pft,litter,Fine root litter lignin fraction
+none,fates_lf_fcel,50percent,1,fraction,pft,litter,Leaf litter cellulose fraction
+none,fates_lf_flab,50percent,1,fraction,pft,litter,Leaf litter labile fraction
+none,fates_lf_flig,50percent,1,fraction,pft,litter,Leaf litter lignin fraction
+none,fates_CWD_frac,50percent,50percent,fraction,global_dim,litter,fraction of woody (bdead+bsw) biomass destined for CWD pool
+none,fates_max_decomp,50percent,50percent,yr-1,global_dim,litter,maximum rate of litter & CWD transfer from non-decomposing class into decomposing class
+none,fates_smpsc,50percent,50percent,mm,pft,hydrology,Soil water potential at full stomatal closure
+none,fates_smpso,50percent,50percent,mm,pft,hydrology,Soil water potential at full stomatal opening
+none,fates_soil_salinity,50percent,50percent,ppt,global,hydrology,soil salinity used for model when not coupled to dynamic soil salinity
+none,fates_leaf_clumping_index,0,1,fraction,pft,leaf,factor describing how much self-occlusion of leaf scattering elements decreases light interception
+none,fates_leaf_diameter,50percent,50percent,m,pft,leaf,Characteristic leaf dimension
+jmaxha,fates_leaf_jmaxha,34000,78000,J/mol,pft,leaf,activation energy for jmax
+jmaxhd,fates_leaf_jmaxhd,88300,280000,J/mol,pft,leaf,deactivation energy for jmax
+none,fates_leaf_jmaxse,50percent,50percent,J/mol/K,pft,leaf,entropy term for jmax
+none,fates_leaf_long,50percent,50percent,yr,pft,leaf,Leaf longevity (ie turnover timescale)
+slatop,fates_leaf_slamax,0.05,0.11448,m^2/gC,pft,leaf,Maximum Specific Leaf Area (SLA)
+slatop,fates_leaf_slatop,pft,pft,m^2/gC,pft,leaf,Specific Leaf Area (SLA) at top of canopy
+medlynintercept,fates_leaf_stomatal_intercept,1,200000,umol H2O/m**2/s,pft,leaf,minimum unstressed stomatal conductance
+none,fates_leaf_stomatal_slope_ballberry,50percent,50percent,KPa**0.5,pft,leaf,stomatal slope parameter
+none,fates_leaf_stomatal_slope_medlyn,50percent,50percent,KPa**0.5,pft,leaf,stomatal slope parameter
+none,fates_leaf_stor_priority,0,1,unitless,pft,leaf,factor governing priority of replacing storage with NPP
+none,fates_leaf_vcmax25top,50percent,50percent,umol CO2/m^2/s,pft,leaf,maximum carboxylation rate of Rub. at 25C
+vcmaxha,fates_leaf_vcmaxha,45000,173000,J/mol,pft,leaf,activation energy for vcmax
+vcmaxhd,fates_leaf_vcmaxhd,90000,415000,J/mol,pft,leaf,deactivation energy for vcmax
+none,fates_leaf_vcmaxse,50percent,50percent,J/mol/K,pft,leaf,entropy term for vcmax
+xl,fates_leaf_xl,pft,pft,fraction,pft,leaf,leaf/stem orientation index
+none,fates_theta_cj_c3,50percent,50percent,unitless,global,leaf,Empirical curvature parameter for ac
+none,fates_theta_cj_c4,50percent,50percent,unitless,global,leaf,Empirical curvature parameter for ac
+none,fates_mort_bmort,50percent,50percent,1/yr,pft,mortality,background mortality rate
+none,fates_mort_disturb_frac,50percent,1,fraction,global,mortality,fraction of canopy mortality that results in disturbance (i.e. transfer of area from new to old patch)
+none,fates_mort_freezetol,50percent,50percent,degrees C,pft,mortality,minimum temperature tolerance
+none,fates_mort_hf_flc_threshold,50percent,1,fraction,pft,mortality,plant fractional loss of conductivity at which drought mortality begins for hydraulic model
+none,fates_mort_hf_sm_threshold,50percent,50percent,unitless,pft,mortality,soil moisture (btran units) at which drought mortality begins for non-hydraulic model
+none,fates_mort_ip_age_senescence,50percent,50percent,years,pft,mortality,Mortality cohort age senescence inflection point. If _ this mortality term is off. Setting this value turns on age dependent mortality.
+none,fates_mort_ip_size_senescence,50percent,50percent,dbh cm,pft,mortality,Mortality dbh senescence inflection point. If _ this mortality term is off. Setting this value turns on size dependent mortality
+none,fates_mort_r_age_senescence,50percent,50percent,mortality rate year^-1,pft,mortality,Mortality age senescence rate of change. Sensible range is around 0.03-0.06. Larger values givesteeper mortality curves.
+none,fates_mort_r_size_senescence,50percent,50percent,mortality rate dbh^-1,pft,mortality,Mortality dbh senescence rate of change. Sensible range is around 0.03-0.06. Larger values give steeper mortality curves.
+none,fates_mort_scalar_coldstress,50percent,50percent,1/yr,pft,mortality,maximum mortality rate from cold stress
+none,fates_mort_scalar_cstarvation,50percent,50percent,1/yr,pft,mortality,maximum mortality rate from carbon starvation
+none,fates_mort_scalar_hydrfailure,50percent,50percent,1/yr,pft,mortality,maximum mortality rate from hydraulic failure
+none,fates_mort_understorey_death,50percent,1,fraction,global,mortality,fraction of plants in understorey cohort impacted by overstorey tree-fall
+none,fates_patch_fusion_tol,100percent,100percent,unitless,global,patch/cohort,minimum fraction in difference in profiles between patches
+none,fates_phen_a,50percent,50percent,none,global,phenology,GDD accumulation function
+none,fates_phen_b,50percent,50percent,none,global,phenology,GDD accumulation function
+none,fates_phen_c,50percent,50percent,none,global,phenology,GDD accumulation function
+none,fates_phen_chiltemp,50percent,50percent,degrees C,global,phenology,chilling day counting threshold for vegetation
+none,fates_phen_cold_size_threshold,0,100,cm,pft,phenology,the dbh size above which will lead to phenology-related stem and leaf drop
+none,fates_phen_coldtemp,50percent,50percent,degrees C,global,phenology,vegetation temperature exceedance that flags a cold-day for leaf-drop
+none,fates_phen_doff_time,50percent,50percent,days,global,phenology,day threshold compared against days since leaves became off-allometry
+none,fates_phen_drought_threshold,50percent,50percent,m3/m3,global,phenology,liquid volume in soil layer
+none,fates_phen_mindayson,50percent,50percent,days,global,phenology,day threshold compared against days since leaves became on-allometry
+none,fates_phen_ncolddayslim,50percent,50percent,days,global,phenology,day threshold exceedance for temperature leaf-drop
+none,fates_phen_stem_drop_fraction,50percent,1,fraction,pft,phenology,fraction of stems to drop for non-woody species during drought/cold
+none,fates_phenflush_fraction,50percent,1,fraction,pft,phenology,Upon bud-burst
+none,fates_senleaf_long_fdrought,0,1,unitless,pft,phenology,multiplication factor for leaf longevity of senescent leaves during drought
+rholnir,fates_rholnir,pft,pft,fraction,pft,radiation,leaf reflectance: NIR
+rholvis,fates_rholvis,pft,pft,fraction,pft,radiation,leaf reflectance: VIS
+rhosnir,fates_rhosnir,50percent,50percent,fraction,pft,radiation,stem reflectance: NIR
+rhosvis,fates_rhosvis,50percent,50percent,fraction,pft,radiation,stem reflectance: VIS
+taulnir,fates_taulnir,pft,pft,fraction,pft,radiation,leaf transmittance: NIR
+taulvis,fates_taulvis,pft,pft,fraction,pft,radiation,leaf transmittance: VIS
+tausnir,fates_tausnir,50percent,50percent,fraction,pft,radiation,stem transmittance: NIR
+tausvis,fates_tausvis,50percent,50percent,fraction,pft,radiation,stem transmittance: VIS
+none,fates_recruit_hgt_min,50percent,50percent,m,pft,recruitment,the minimum height (ie starting height) of a newly recruited plant
+none,fates_recruit_initd,50percent,50percent,stems/m2,pft,recruitment,initial seedling density for a cold-start near-bare-ground simulation
+none,fates_seed_alloc,50percent,50percent,fraction,pft,recruitment,fraction of available carbon balance allocated to seeds
+none,fates_seed_dbh_repro_threshold,50percent,50percent,cm,pft,recruitment,the diameter (if any) where the plant will start extra clonal allocation to the seed pool
+none,fates_seed_decay_rate,50percent,1,fraction,pft,recruitment,fraction of seeds that decay per year
+none,fates_seed_germination_rate,50percent,1,fraction,pft,recruitment,fraction of seeds that germinate per year
+none,fates_seed_suppl,0,5,KgC/m2/yr,pft,recruitment,Supplemental external seed rain source term (non-mass conserving)
+none,fates_base_mr_20,50percent,50percent,gC/gN/s,global,respiration,Base maintenance respiration rate for plant tissues
+none,fates_grperc,50percent,50percent,unitless,pft,respiration,Growth respiration factor
+none,fates_maintresp_reduction_curvature,50percent,50percent,fraction,pft,respiration,curvature of MR reduction as f(carbon storage)
+none,fates_maintresp_reduction_intercept,50percent,50percent,fraction,pft,respiration,intercept of MR reduction as f(carbon storage)
+none,fates_q10_froz,50percent,50percent,unitless,global,respiration,Q10 for frozen-soil respiration rates
+none,fates_q10_mr,50percent,50percent,unitless,global,respiration,Q10 for maintenance respiration
+none,fates_displar,50percent,50percent,unitless,pft,turbulence,Ratio of displacement height to canopy top height
+none,fates_z0mr,50percent,50percent,unitless,pft,turbulence,Ratio of momentum roughness length to canopy top height
+none,fates_branch_turnover,50percent,50percent,yr,pft,turnover,turnover time of branches
+none,fates_root_long,50percent,50percent,yr,pft,turnover,root longevity (alternatively
