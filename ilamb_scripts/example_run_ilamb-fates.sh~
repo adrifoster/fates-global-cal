@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#SBATCH -N 1
+#SBATCH -t 01:00:00
+#SBATCH -J no_spinup_JH
+#SBATCH -A e3sm
+#SBATCH -o ilamb_job_nospinup_JH.o%j
+
+
+source /share/apps/E3SM/conda_envs/load_latest_e3sm_unified_compy.sh
+
+
+export ILAMB_ROOT=/compyfs/need138/ILAMB
+
+srun -n 24 ilamb-run --config elm_fates_RCmodes_nospinup.cfg --model_root $ILAMB_ROOT/MODELS/ --models spmode spmode_JH fixedbiognocomp fixedbiognocomp_JH fixedbiogcomp fixedbiogcomp_JH full full_JH full_JH_spitfire --regions global --filter .elm.h0.  --model_setup nospinup_JH_default.txt
+
