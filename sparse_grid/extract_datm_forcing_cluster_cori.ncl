@@ -43,7 +43,7 @@ begin
 ; The new GSWP3 domain file. Note: I labeled this "dense", not sparse because it is the forcing condensed to a vector
 ; of 400 grid cells, which in retrospect is a bit confusing.
 ; This is for output_v4 version (final)
- atm_domain_filename_new  = "/global/homes/j/jneedham/sparse_grid/domain.lnd.360x720_gswp3.0v1.c170606v4.dense"+maxcnt+".nc"
+ atm_domain_filename_new  = "/global/cscratch1/sd/jneedham/sparse_grid/domain.lnd.360x720_gswp3.0v1.c170606v4.dense"+maxcnt+".nc"
 
 ; Open original atm domain file for read
  in2 = addfile(atm_domain_filename_orig,"r")
@@ -184,7 +184,7 @@ begin
  file_name = "clmforc.GSWP3.c2011.0.5x0.5."
  
 ; Create the output directories
- src_dir_out = "/global/homes/j/jneedham/sparse_grid/atm_forcing.datm7.GSWP3.0.5d.v1.c"+currdate+"_"+maxcnt+"/"
+ src_dir_out = "/global/cscratch1/sd/jneedham/sparse_grid/atm_forcing.datm7.GSWP3.0.5d.v1.c"+currdate+"_"+maxcnt+"/"
  system("mkdir -p "+src_dir_out)
  system("mkdir -p "+src_dir_out+var_dir(0))
  system("mkdir -p "+src_dir_out+var_dir(1))
