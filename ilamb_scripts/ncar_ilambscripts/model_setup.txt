@@ -1,0 +1,3 @@
+# Model Name            , Location of Files                                                                     ,  Shift From,  Shift To
+CTSM5.1_FATES_SP_master        , /glade/scratch/afoster/archive/FATES_SP_mster/lnd/hist/
+CTSM5.1_FATES_SP_pftopt , /glade/scratch/afoster/archive/FATES_SP_pft-optical/lnd/hist/

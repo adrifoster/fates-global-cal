@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#PBS -N ilamb_diagnostics
+#PBS -q regular
+#PBS -l select=4:ncpus=2:mpiprocs=2:mem=109GB
+#PBS -l walltime=12:00:00
+#PBS -A P93300041
+#PBS -j oe
+#PBS -k eod
+#PBS -m abe
+#PBS -M oleson@ucar.edu
+
+#source /etc/profile.d/modules.sh
+
+export caseid=ctsm51_cesm23a02cPPEn08ctsm51d030_1deg_GSWP3V1_hist
+
+#conda init bash
+source /glade/work/oleson/miniconda3/etc/profile.d/conda.sh
+
+export MPI_UNBUFFERED_STDIO=true
+export TMPDIR=$TMPDIR
+mkdir -p $TMPDIR
+
+conda activate ilamb
+
+today="$(date '+%Y%m%d-%H%M%S')"
+log_filename=/glade/work/oleson/diagnostics_ilamb_standalone/runs/$caseid/logs/ilamb_diagnostics.log.$today
+mkdir -p /glade/work/oleson/diagnostics_ilamb_standalone/runs/$caseid/logs
+
+export MPLBACKEND=Agg
+
+export ILAMB_ROOT=/glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all
+
+#cp /glade/work/oleson/ilamb_stage-next-version/demo/ilamb_nohoff_final_CLM.cfg .
+
+# To check peak memory usage
+#module load peak_memusage
+#export MPI_SHEPHERD=true
+#mpiexec_mpt peak_memusage.exe dplace -s 1 /glade/work/oleson/ilamb_standalone/bin/ilamb-run  --config ./ilamb_nohoff_final_CLM_SP.cfg --model_root /glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all/MODELS/  --models R15 PPE PPEnocrop --build_dir /glade/work/oleson/diagnostics_ilamb_standalone/runs/$caseid/_build_PPE2nocrop --define_regions /glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all/DATA/regions/LandRegions.nc --regions global --model_setup /glade/work/oleson/diagnostics_ilamb_standalone/runs/$caseid/model_setup.txt --filter .clm2.h0. >> ${log_filename} 2>&1
+
+# Normal submission
+mpiexec_mpt dplace -s 1 /glade/work/oleson/ilamb_standalone/bin/ilamb-run  --config ./ilamb_nohoff_final_CLM.cfg --model_root /glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all/MODELS/  --models CLM50 CTSM51 --build_dir /glade/work/oleson/diagnostics_ilamb_standalone/runs/$caseid/_build_CLM50CTSM51BGC --define_regions /glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all/DATA/regions/LandRegions.nc --regions global --model_setup /glade/work/oleson/diagnostics_ilamb_standalone/runs/$caseid/model_setup.txt --filter .clm2.h0. >> ${log_filename} 2>&1

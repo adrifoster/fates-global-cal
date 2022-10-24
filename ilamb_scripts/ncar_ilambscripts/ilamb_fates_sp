@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export MPLBACKEND=Agg
+
+# path to ILAMB observational data and models
+export ILAMB_ROOT=/glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all
+
+# Normal submission
+ilamb-run  --config ./ilamb_CLMFATES_SP.cfg --model_root /glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all/MODELS/  --models CTSM5.1_FATES_SP_master CTSM5.1_FATES_SP_pftopt --define_regions /glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all/DATA/regions/LandRegions.nc --regions global --model_setup model_setup.txt --filter .clm2.h0.
