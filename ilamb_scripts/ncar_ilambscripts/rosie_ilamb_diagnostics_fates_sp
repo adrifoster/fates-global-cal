@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#PBS -N ilamb_diagnostics
+#PBS -q regular
+#PBS -l select=4:ncpus=2:mpiprocs=2:mem=109GB
+#PBS -l walltime=12:00:00
+#PBS -A P93300041
+#PBS -j oe
+#PBS -k eod
+#PBS -m abe
+#PBS -M oleson@ucar.edu
+
+#source /etc/profile.d/modules.sh
+
+export caseid=i2000sp_new_fsurdat
+
+#conda init bash
+source /glade/work/oleson/miniconda3/etc/profile.d/conda.sh
+
+export MPI_UNBUFFERED_STDIO=true
+export TMPDIR=$TMPDIR
+mkdir -p $TMPDIR
+
+conda activate ilamb
+
+export MPLBACKEND=Agg
+
+export ILAMB_ROOT=/glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all
+
+cp /glade/work/oleson/ilamb_stage-next-version/demo/ilamb_nohoff_final_CLM_SP.cfg .
+
+# Normal submission
+/glade/u/home/rfisher/fates-global-cal/ilamb_scripts/ncar_ilambscripts/ilamb-run --config ilamb_CLMFATES_SP.cfg \
+--model_root /glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all/MODELS/  \
+--models  RTM_ens4_case_1  RTM_ens3_case_1 RTM_ens3_case_10 \
+--build_dir /glade/u/home/rfisher/fates-global-cal/ilamb_scripts/ncar_ilambscripts/fates_rtm/_build \
+--define_regions /glade/p/cesm/lmwg_dev/oleson/ILAMB/ILAMB_all/DATA/regions/LandRegions.nc --regions global \
+--model_setup /glade/u/home/rfisher/fates-global-cal/ilamb_scripts/model_setup_files/model_setup_fatesrtm.txt \
+--filter  .clm2.h0. 
+
+#--confrontation Albedo/CERES
