@@ -1,0 +1,9 @@
+RTM_ens2_case_0 , /glade/scratch/rfisher/archive/RTM_ens2_case_0/lnd/hist/ 
+RTM_ens2_case_1 , /glade/scratch/rfisher/archive/RTM_ens2_case_1/lnd/hist/ 
+RTM_ens2_case_2 , /glade/scratch/rfisher/archive/RTM_ens2_case_2/lnd/hist/ 
+RTM_ens2_case_3 , /glade/scratch/rfisher/archive/RTM_ens2_case_3/lnd/hist/ 
+RTM_ens2_case_4 , /glade/scratch/rfisher/archive/RTM_ens2_case_4/lnd/hist/ 
+RTM_ens2_case_5 , /glade/scratch/rfisher/archive/RTM_ens2_case_5/lnd/hist/ 
+RTM_ens2_case_6 , /glade/scratch/rfisher/archive/RTM_ens2_case_6/lnd/hist/ 
+RTM_ens2_case_7 , /glade/scratch/rfisher/archive/RTM_ens2_case_7/lnd/hist/ 
+RTM_ens2_case_8 , /glade/scratch/rfisher/archive/RTM_ens2_case_8/lnd/hist/ 

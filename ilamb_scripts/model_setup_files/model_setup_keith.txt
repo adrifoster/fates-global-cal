@@ -1,0 +1,10 @@
+# Model Name       , Location of Files                                , Shift From , Shift to
+spmode             , /compyfs/need138/ILAMB/MODELS/spmode             , 2010       , 2000
+spmode_JH          , /compyfs/need138/ILAMB/MODELS/spmode_JH          , 2010       , 2000
+fixedbiognocomp    , /compyfs/need138/ILAMB/MODELS/fixedbiognocomp    , 2180       , 2000
+fixedbiognocomp_JH , /compyfs/need138/ILAMB/MODELS/fixedbiognocomp_JH , 2180       , 2000
+fixedbiogcomp      , /compyfs/need138/ILAMB/MODELS/fixedbiogcomp      , 2180       , 2000
+fixedbiogcomp_JH   , /compyfs/need138/ILAMB/MODELS/fixedbiogcomp_JH   , 2180       , 2000
+full               , /compyfs/need138/ILAMB/MODELS/full               , 2180       , 2000
+full_JH            , /compyfs/need138/ILAMB/MODELS/full_JH            , 2180       , 2000
+full_JH_spitfire   , /compyfs/need138/ILAMB/MODELS/full_JH_spitfire   , 2180       , 2000

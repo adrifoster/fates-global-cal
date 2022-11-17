@@ -1,0 +1,4 @@
+# Model Name       , Location of Files                                , Shift From , Shift to
+RTM_ens3_case_10             , /glade/scratch/rfisher/archive/RTM_ens3_case_10/lnd/hist/
+RTM_ens5_case_10             , /glade/scratch/rfisher/archive/RTM_ens5_case_10/lnd/hist/
+RTM_ens6_case_10             , /glade/scratch/rfisher/archive/RTM_ens6_case_10/lnd/hist/
