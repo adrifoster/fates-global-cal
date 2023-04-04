@@ -1,0 +1,29 @@
+./xmlchange --id ATM_DOMAIN_FILE --val domain.lnd.fv1.9x2.5_gx1v7.18120584.nc
+./xmlchange --id ATM_DOMAIN_PATH --val /qfs/people/need138/fates-fbnc-cal
+./xmlchange --id LND_DOMAIN_FILE --val domain.lnd.fv1.9x2.5_gx1v7.18120584.nc
+./xmlchange --id LND_DOMAIN_PATH --val /qfs/people/need138/fates-fbnc-cal
+./xmlchange --id NTASKS_CPL --val -2
+./xmlchange --id NTASKS_OCN --val -2
+./xmlchange --id NTASKS_WAV --val -2
+./xmlchange --id NTASKS_GLC --val -2
+./xmlchange --id NTASKS_ICE --val -2
+./xmlchange --id NTASKS_ROF --val -2
+./xmlchange --id NTASKS_LND --val -2
+
+./xmlchange --id STOP_N --val 10
+./xmlchange --id STOP_OPTION --val nyears
+./xmlchange --id REST_OPTION --val nyears
+./xmlchange --id REST_N --val 10
+./xmlchange --id RESUBMIT --val 29
+./xmlchange --id RUN_STARTDATE --val 2005-01-01
+./xmlchange --id DATM_MODE --val CLMGSWP3v1
+./xmlchange --id DATM_CLMNCEP_YR_ALIGN --val 2005
+./xmlchange --id DATM_CLMNCEP_YR_START --val 2005
+./xmlchange --id DATM_CLMNCEP_YR_END --val 2014
+./xmlchange --id SAVE_TIMING --val FALSE
+
+./xmlchange --id JOB_WALLCLOCK_TIME --val 04:59:00
+./xmlchange --id JOB_QUEUE --val slurm
+./xmlchange --id SAVE_TIMING --val FALSE
+
+./xmlchange --id ELM_FORCE_COLDSTART --val on

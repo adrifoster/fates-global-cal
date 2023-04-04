@@ -1,0 +1,40 @@
+#!/bin/sh
+ 
+# ======================================================================================
+# ======================================================================================
+export CASEDIR=/compyfs/need138/elm_runs/calibration/fbnc
+export SRCDIR=/qfs/people/need138/E3SM
+export USER_MODS_DIR=/qfs/people/need138/fates-fbnc-cal/user_mod_dir/fates_fbnc
+
+export PARAM=$1
+export VALUE=$2
+
+export TAG=${PARAM}_${VALUE}  
+export NOW=$(date +'%Y-%m-%d')
+
+CASE_NAME=${CASEDIR}/${TAG}
+
+cd ${SRCDIR}/cime/scripts
+
+rm -r ${CASE_NAME}
+
+./create_newcase --case ${CASE_NAME} --res f19_f19 --compset 2000_DATM%QIA_ELM%BGC-FATES_SICE_SOCN_SGLC_SWAV --mach compy --compiler intel --project e3sm --user-mods-dirs ${USER_MODS_DIR}
+
+
+cd ${CASE_NAME}
+
+cp ${USER_MODS_DIR}/* .
+
+./xmlchange EXEROOT=/compyfs/need138/elm_runs/calibration/fbnc_base_b645be3_7f448b0.2023-04-04/bld
+./xmlchange BUILD_COMPLETE=TRUE
+./xmlchange RUNDIR=${CASE_NAME}/run
+
+
+
+cat >> user_nl_elm <<EOF
+fates_paramfile='/qfs/people/need138/fates-fbnc-cal/param_dir/fates_params_fbnc_$1_$2.nc'
+EOF
+
+./case.setup
+./case.submit
+
