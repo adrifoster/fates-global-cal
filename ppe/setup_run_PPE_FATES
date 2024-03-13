@@ -1,103 +1,78 @@
 #!/usr/bin/env bash
 
-#
-# #########################
-# Purpose: Create and build a sparse grid run for FATES SP
-# Author: Adrianna C. Foster
-# Date: April, 2022
-# bash version 4.2.46
-# #########################
-# #########################
-# Notes: Co-opted from Keith Oleson's script for the CLM5 PPE (/glade/work/oleson/PPE/setup_run_PPE_BGC.csh)
+#==============USER MODS=======================================
+src_dir=/glade/work/afoster/FATES_calibration/CTSM_calib
+dir_tag=/glade/work/afoster/FATES_calibration/FATES_SP_OAAT
+case=ctsm51FATES_SP_OAAT
+chargenum=P93300041
+scratch_dir=/glade/derecho/scratch/afoster
+archive_dir=/glade/derecho/scratch/afoster/archive
+datm_dir=/glade/work/afoster/FATES_calibration/user_datm_files
+user_nl_dir=/glade/work/afoster/FATES_calibration/user_nl_files
+
+scenario=SatPhen_derecho
+cyear=2000
+compset=2000_DATM%GSWP3v1_CLM51%FATES_SICE_SOCN_SROF_SGLC_SWAV
 
 #==============================================================
-# Parameters: file names and directories, etc.
+# case setup and run
 #==============================================================
 
-TAG=FATES_PPE_base                              ## used to create case name
-CASEDIR=/glade/work/afoster/FATES_SP/PPE/cases  ## case directory location
-SRCDIR=/glade/work/afoster/ctsm_fates           ## CTSM code directory
+## case name and path
+suff=_${scenario}_${cyear}
+case_name=${case}${suff}
+case_path=${dir_tag}/${case_name}
 
+# change into cime directory
+cd ${src_dir}/cime/scripts
 
-#==============================================================
-# Step 1. Set up case name
-#==============================================================
+## create a new case
+./create_newcase --case ${case_path} --compset ${compset} --res f19_g17 --project ${chargenum} --run-unsupported 
+cd ${case_path}
 
-## Get CTSM and FATES git versions - these will go into case name
-cd ${SRCDIR}
-githashctsm=`git log -n 1 --format=%h`
+## copy user_nl_clm and user_nl_datm_streams into this file
+cp ${user_nl_dir}/user_nl_clm .
 
-cd src/fates
-githashfates=`git log -n 1 --format=%h`
-
-## Create case name with ctsm and fates githash
-case_name=${CASEDIR}/${TAG}_${githashctsm}_${githashfates}
-
-## Define CIME directory
-base_dir=${SRCDIR}/cime/scripts
-cd ${base_dir}
-
-
-#==============================================================
-# Step 2. Create the case and update parameters/files
-#==============================================================
-
-./create_newcase --case ${case_name} --compset I2000Clm51FatesSpRsGs --res f19_g17 --project P93300041 --run-unsupported --driver mct
-
-
-cd ${case_name}
-
-## Copy DATM streams files - using Control for now
-cp /glade/work/oleson/PPE/casefiles/Control/user_datm.streams.txt.CLMGSWP3v1.Precip .
-cp /glade/work/oleson/PPE/casefiles/Control/user_datm.streams.txt.CLMGSWP3v1.Solar .
-cp /glade/work/oleson/PPE/casefiles/Control/user_datm.streams.txt.CLMGSWP3v1.TPQW .
-
-## Copy over user_nl_datm file
-cp /glade/work/oleson/PPE/casefiles/Control/user_nl_datm .
-
-## Copy over user_nl_clm file
-cp /glade/work/afoster/FATES_SP/PPE/casefiles/user_nl_clm .
-
-## Update env_run.xml
+# env_run.xml
 ./xmlchange RUN_STARTDATE=0001-01-01
 ./xmlchange STOP_OPTION=nyears
-./xmlchange STOP_N=20
-./xmlchange RESUBMIT=1
-./xmlchange ATM_DOMAIN_FILE=domain.lnd.fv1.9x2.5_gx1v7.181205v4.sparse400.nc
-./xmlchange ATM_DOMAIN_PATH=/glade/p/cgd/tss/people/oleson/modify_domain
-./xmlchange LND_DOMAIN_FILE=domain.lnd.fv1.9x2.5_gx1v7.181205v4.sparse400.nc
-./xmlchange LND_DOMAIN_PATH=/glade/p/cgd/tss/people/oleson/modify_domain
-./xmlchange DATM_CLMNCEP_YR_ALIGN=1
-./xmlchange DATM_CLMNCEP_YR_START=2005
-./xmlchange DATM_CLMNCEP_YR_END=2014
+./xmlchange STOP_N=10
+./xmlchange RESUBMIT=5
+./xmlchange MASK_MESH='/glade/work/afoster/FATES_calibration/mesh_files/lnd_mesh.nc'
+./xmlchange ATM_DOMAIN_MESH='/glade/work/afoster/FATES_calibration/mesh_files/lnd_mesh.nc'
+./xmlchange LND_DOMAIN_MESH='/glade/work/afoster/FATES_calibration/mesh_files/lnd_mesh.nc'
+./xmlchange DATM_YR_ALIGN=1
+./xmlchange DATM_YR_START=2005
+./xmlchange DATM_YR_END=2014
 
-## Update env_mach_pes.xml
-./xmlchange NTASKS_CPL=-2
-./xmlchange NTASKS_OCN=-2
-./xmlchange NTASKS_WAV=-2
-./xmlchange NTASKS_GLC=-2
-./xmlchange NTASKS_ICE=-2
-./xmlchange NTASKS_ROF=-2
-./xmlchange NTASKS_LND=-2
+./xmlchange CLM_ACCELERATED_SPINUP=off
 
-## Update env_workflow.xml
-./xmlchange JOB_WALLCLOCK_TIME=02:00:00 --subgroup case.run
-./xmlchange JOB_QUEUE=economy --subgroup case.run
+# env_mach_pes.xml
+./xmlchange NTASKS_OCN=112
+./xmlchange NTASKS_WAV=112
+./xmlchange NTASKS_GLC=112
+./xmlchange NTASKS_ICE=112
+./xmlchange NTASKS_ROF=112
+./xmlchange ROOTPE_LND=16
+./xmlchange ROOTPE_OCN=16
+./xmlchange ROOTPE_WAV=16
+./xmlchange ROOTPE_GLC=16
+./xmlchange ROOTPE_ICE=16
+./xmlchange ROOTPE_ROF=16
+./xmlchange ROOTPE_ATM=0
+./xmlchange ROOTPE_CPL=16
+./xmlchange NTASKS_LND=112
+./xmlchange NTASKS_ATM=16
+./xmlchange NTASKS_CPL=112
 
-#==============================================================
-# Step 3. Set up the case, preview namelists, and build the case
-#==============================================================
+# env_workflow.xml
+./xmlchange JOB_WALLCLOCK_TIME=02:00:00
 
+# Setup case
 ./case.setup
 
+# Generate namelists
 ./preview_namelists
 
-./case.build
-
-
-#==============================================================
-# Step 4. Submit the case
-#==============================================================
-
-./case.submit
-
+# Build case
+qcmd -- ./case.build
